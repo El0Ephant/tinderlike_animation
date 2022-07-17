@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:another_flushbar/flushbar.dart';
 
+import 'package:tinderlike/theme.dart';
+
 //Старая версия, не используется в проекте
 class SwipeCard extends StatefulWidget {
   const SwipeCard({Key? key,

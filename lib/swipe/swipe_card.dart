@@ -37,21 +37,11 @@ class _SwipeCardState extends State<SwipeCard>
 
   /// Calculates and runs a [SpringSimulation].
   Future<SwipeEnum> _runAnimation(Offset pixelsPerSecond, Size size, [SwipeEnum? type]) async {
-    final swipeType = type ?? swipeInfo(_dragAlignment.x);
+    final swipeType = type ?? swipeInfo(_dragAlignment.x, -_dragAlignment.y);
 
-    late final Alignment resultAlignment;
+    final Alignment resultAlignment = swipeType.alignment;
 
-    switch (swipeType.index) {
-      case 0:
-        resultAlignment = const Alignment(-9, 0);
-        break;
-      case 1:
-        resultAlignment = const Alignment(9, 0);
-        break;
-      case 2:
-        resultAlignment = Alignment.center;
-        break;
-    }
+
 
     _animation = _controller.drive(
       AlignmentTween(
@@ -67,8 +57,8 @@ class _SwipeCardState extends State<SwipeCard>
     final unitVelocity = unitsPerSecond.distance;
 
     const spring = SpringDescription(
-      mass: 50,
-      stiffness: 10,
+      mass: 40,
+      stiffness: 100,
       damping: 1,
     );
 
@@ -124,10 +114,15 @@ class _SwipeCardState extends State<SwipeCard>
               const Offset(300,40), size, SwipeEnum.left);
           performSwipe(SwipeEnum.left, context);
         }
-        if (state is RightSwipe) {
+        else if (state is RightSwipe) {
           await _runAnimation(
               const Offset(300,40), size, SwipeEnum.right);
           performSwipe(SwipeEnum.right, context);
+        }
+        else if (state is UpSwipe) {
+          await _runAnimation(
+              const Offset(300,40), size, SwipeEnum.up);
+          performSwipe(SwipeEnum.up, context);
         }
       },
       child: GestureDetector(

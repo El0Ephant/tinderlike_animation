@@ -2,10 +2,11 @@ import "package:flutter/material.dart";
 
 
 class CircleButton extends StatelessWidget {
-  CircleButton({Key? key, required this.onTap, this.color = Colors.white}) : super(key: key);
+  const CircleButton({Key? key, required this.onTap, this.color = Colors.white, this.icon}) : super(key: key);
 
   final Color color;
   final Function onTap;
+  final Icon? icon;
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
@@ -15,7 +16,7 @@ class CircleButton extends StatelessWidget {
       elevation: 2.0,
       fillColor: color,
       shape: const CircleBorder(),
-      child: SizedBox(height: MediaQuery.of(context).size.height*0.07,),
+      child: SizedBox(height: MediaQuery.of(context).size.height*0.06, child:  icon ?? const Center(),),
     );
   }
 }

@@ -8,4 +8,5 @@ class ButtonCubit extends Cubit<ButtonState> {
 
   void leftSwipe() => emit(LeftSwipe());
   void rightSwipe() => emit(RightSwipe());
+  void upSwipe() => emit(UpSwipe());
 }
